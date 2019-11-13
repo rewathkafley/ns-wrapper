@@ -26,15 +26,6 @@ steps:
     yarn global add webpack webpack-cli nativescript
   displayName: 'Install Global packages'
 
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
-    script: 'ruby -e "$(curl -fsSL https://www.nativescript.org/setup/mac)"'
-    noProfile: false
-    noRc: false
-  displayName: "Setup NativeScript"
-
-
 - script: 'tns doctor'
   displayName: "Verify NativeScript Requirements"
   workingDirectory: ''
