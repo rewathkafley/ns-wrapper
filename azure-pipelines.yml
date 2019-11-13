@@ -15,7 +15,6 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
-
 - task: YarnInstaller@3
   inputs:
     versionSpec: '1.x'
@@ -30,6 +29,14 @@ steps:
 - script: 'tns doctor'
   displayName: "Verify NativeScript Requirements"
   workingDirectory: ''
+
+- script: 'tns build ios'
+  workingDirectory: ''
+  displayName: "Build IOS"
+
+- script: 'tns build android'
+  workingDirectory: ''
+  displayName: "Build Android"
 
 
 
