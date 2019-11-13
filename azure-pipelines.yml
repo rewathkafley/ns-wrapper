@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- master
+- azure-pipelines
 
 pool:
   vmImage: 'macos-latest'
@@ -15,9 +15,29 @@ steps:
     versionSpec: '10.x'
   displayName: 'Install Node.js'
 
+
+- task: YarnInstaller@3
+  inputs:
+    versionSpec: 
+    checkLatest: true
+  displayName: 'Install Yarn'
+
 - script: |
-    npm install -g webpack webpack-cli --save-dev
-    npm install
-    tns doctor
-    npx webpack --config webpack.config.js
-  displayName: 'npm install, run webpack'
+    yarn global add webpack webpack-cli nativescript
+  displayName: 'Install Global packages'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'ruby -e "$(curl -fsSL https://www.nativescript.org/setup/mac)"'
+    noProfile: false
+    noRc: false
+  displayName: "Setup NativeScript"
+
+
+- script: 'tns doctor'
+  displayName: "Verify NativeScript Requirements"
+  workingDirectory: ''
+
+
+
