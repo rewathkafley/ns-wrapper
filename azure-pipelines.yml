@@ -24,6 +24,7 @@ steps:
 
 - script: |
     yarn global add webpack webpack-cli nativescript
+    pip install six
   displayName: 'Install Global packages'
 
 - script: 'tns doctor'
